@@ -3,10 +3,20 @@ import cors from "cors";
 import dotenv from "dotenv";
 dotenv.config();
 import mongoose from "mongoose"
+
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static("uploads"));
+
+import postRoute from "./routes/post.routes.js";
+import userRoute from "./routes/user.routes.js";
+
+app.use(postRoute);
+app.use(userRoute);
+
 
 app.get("/", (req, res) => {
   res.send("hello");
